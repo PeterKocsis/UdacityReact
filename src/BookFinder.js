@@ -32,7 +32,7 @@ class BookFinder extends React.Component {
   //TODO it seems to me its not working exactly how it should. It still calls multiple time
   debounce = (func, delay) => {
     let inDebounce;
-    return function() {
+    return function () {
       const context = this
       const args = arguments
       clearTimeout(inDebounce)
@@ -44,13 +44,13 @@ class BookFinder extends React.Component {
    * @description Get a collection of book objects based on the query string
    * @param {string} query
    */
-  getSearchResult=(query)=> {
-    if(query!==''){
-    BooksAPI.search(query)
-      .then((results) => {
-        this.updateBooks(results);
-      })
-      .catch(() => { this.updateBooks([]) });
+  getSearchResult = (query) => {
+    if (query !== '') {
+      BooksAPI.search(query)
+        .then((results) => {
+          this.updateBooks(results);
+        })
+        .catch(() => { this.updateBooks([]) });
       console.log(query);
     } else {
       this.updateBooks([]);
@@ -64,7 +64,7 @@ class BookFinder extends React.Component {
     event.preventDefault();
     let query = event.target.value;
     let promise = Promise.resolve(this.updateQuery(query));
-    promise.then(this.debounce(()=>this.getSearchResult(this.state.query), 700));
+    promise.then(this.debounce(() => this.getSearchResult(this.state.query), 700));
   };
 
   render() {

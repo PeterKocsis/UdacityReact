@@ -1,6 +1,13 @@
 import React from 'react'
 
 class ShelfSelector extends React.Component {
+
+  /**
+   * @description Represent a shelfselector. It sets the shelf property default state.
+   * @constructor
+   * @param {object} props - The props of the component
+   *
+   */
   constructor(props) {
     super(props);
     let shelf = 'none';
@@ -15,6 +22,10 @@ class ShelfSelector extends React.Component {
     }
   }
 
+  /**
+   * @description Updates the shelf state based on the given event
+   * @param {object} event - The triggering event object
+   */
   updateBookShelf = (event) => {
     event.preventDefault();
     let targetShelf = event.target.value;

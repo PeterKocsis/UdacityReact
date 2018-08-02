@@ -9,18 +9,30 @@ class BookFinder extends React.Component {
     books: [],
   }
 
+  /**
+   * @description Updates the this.state.books property with the given value
+   * @param {object} result - A collection of book objects
+   */
   updateBooks = (result) => {
     this.setState(() => ({
       books: result ? [...result] : []
     }))
   };
 
+  /**
+   * @description Updates the this.state.query property with the given value
+   * @param {string} query - The new value of search input
+   */
   updateQuery = (query) => {
     this.setState(() => ({
       query: query
     }))
   };
 
+  /**
+   * @description Get a collection of book objects based on the query string
+   * @param {string} query
+   */
   getSearchResult(query) {
     BooksAPI.search(query)
       .then((results) => {
@@ -29,6 +41,9 @@ class BookFinder extends React.Component {
       .catch(() => { this.updateBooks([]) });
   }
 
+  /**
+   * @description Make a search request for the backend service and updates the state of the component based on answer
+   */
   searchBooks = (event) => {
     event.preventDefault();
     let query = event.target.value;

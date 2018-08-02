@@ -12,7 +12,7 @@ const Book = (props) => {
         <div className="book-shelf-changer">
           <ShelfSelector
             book={props.book}
-            appJsParams = {props.appJsParams}/>
+            appJsParams={props.appJsParams} />
         </div>
       </div>
       <div className="book-title">{props.book.title}</div>

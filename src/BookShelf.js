@@ -8,7 +8,7 @@ export const BookShelf = (props) => {
       <div className="bookshelf-books">
         <BookList
           displayedBooks={props.displayedBooks.filter(item => item.shelf === props.shelf.categoryName)}
-          appJsParams = {props.appJsParams}/>
+          appJsParams={props.appJsParams} />
       </div>
     </div>
   )

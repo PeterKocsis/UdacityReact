@@ -1,8 +1,8 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import {Link} from 'react-router-dom'
-import {Route} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import BookFinder from './BookFinder'
 import { BookShelf } from './BookShelf'
 
@@ -54,8 +54,8 @@ class BooksApp extends React.Component {
 
   render() {
     const appJsParams = {
-      booksOnShelfs : this.state.books,
-      onAssignBook : this.moveBookToShelf
+      booksOnShelfs: this.state.books,
+      onAssignBook: this.moveBookToShelf
     }
     return (
       <div className="app">
@@ -71,7 +71,7 @@ class BooksApp extends React.Component {
                 {this.state.shelfs.map((item) => {
                   return (
                     <div key={item.categoryName}>
-                      <BookShelf displayedBooks={this.state.books} appJsParams={appJsParams} shelf={item}/>
+                      <BookShelf displayedBooks={this.state.books} appJsParams={appJsParams} shelf={item} />
                     </div>
                   )
                 })}

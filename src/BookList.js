@@ -9,7 +9,7 @@ const BookList = (props) => {
           <li key={item.id}>
             <Book
               book={item}
-              appJsParams = {props.appJsParams}/>
+              appJsParams={props.appJsParams} />
           </li>)
       })}
     </ol>

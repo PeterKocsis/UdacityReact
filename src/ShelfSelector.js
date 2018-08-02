@@ -1,31 +1,31 @@
 import React from 'react'
 
 class ShelfSelector extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     let shelf = 'none';
     for (const book of props.appJsParams.booksOnShelfs) {
-      if(book.id === props.book.id){
+      if (book.id === props.book.id) {
         shelf = book.shelf;
         break;
       }
     }
     this.state = {
-      shelf : shelf
+      shelf: shelf
     }
   }
 
-  updateBookShelf=(event)=>{
+  updateBookShelf = (event) => {
     event.preventDefault();
     let targetShelf = event.target.value;
-    this.setState(()=>({
-      shelf : targetShelf
+    this.setState(() => ({
+      shelf: targetShelf
     }))
     this.props.appJsParams.onAssignBook(this.props.book, targetShelf)
   };
 
-  render(){
-    return(
+  render() {
+    return (
       <select value={this.state.shelf} onChange={(event) => {
         console.log("OnChange event fired");
         this.updateBookShelf(event);

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import BookList from './BookList'
 import * as BooksAPI from './BooksAPI'
 
@@ -21,15 +21,15 @@ class BookFinder extends React.Component {
     }))
   };
 
-  getSearchResult(query){
-      BooksAPI.search(query)
+  getSearchResult(query) {
+    BooksAPI.search(query)
       .then((results) => {
         this.updateBooks(results);
       })
-      .catch(() => { this.updateBooks([])});
+      .catch(() => { this.updateBooks([]) });
   }
 
-  searchBooks=(event)=>{
+  searchBooks = (event) => {
     event.preventDefault();
     let query = event.target.value;
     this.updateQuery(query);
@@ -46,12 +46,12 @@ class BookFinder extends React.Component {
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event) => {this.searchBooks(event)}}
+              onChange={(event) => { this.searchBooks(event) }}
             />
           </div>
         </div>
         <div className="search-books-results">
-          <BookList displayedBooks={this.state.books} appJsParams={this.props.appJsParams}/>
+          <BookList displayedBooks={this.state.books} appJsParams={this.props.appJsParams} />
           <ol className="books-grid"></ol>
         </div>
       </div>

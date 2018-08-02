@@ -1,4 +1,5 @@
 import React from 'react'
+import ShelfSelector from './ShelfSelector'
 
 const Book = (props) => {
   const backgroundImageExists = props.book.hasOwnProperty("imageLinks");
@@ -9,16 +10,10 @@ const Book = (props) => {
           <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${props.book.imageLinks.thumbnail})`, backgroundColor: '#cccccc' }}></div>
           : <div className="book-cover" style={{ width: 128, height: 192, backgroundColor: '#cccccc' }}></div>}
         <div className="book-shelf-changer">
-          <select value={props.book.shelf} onChange={(event) => {
-            console.log("OnChange event fired");
-            props.onBookReplace(props.book, event.target.value);
-          }}>
-            <option value="move" disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
+          <ShelfSelector
+            book={props.book}
+            savedBooks = {props.savedBooks}
+            onBookReplace={props.onBookReplace}/>
         </div>
       </div>
       <div className="book-title">{props.book.title}</div>

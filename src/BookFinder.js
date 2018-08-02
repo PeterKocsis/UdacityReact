@@ -6,51 +6,34 @@ import * as BooksAPI from './BooksAPI'
 class BookFinder extends React.Component {
   state = {
     query: '',
-    books: []
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("Will recive Props");
-    this.mergeSavedBooksIntoQueryResult(nextProps.books, this.state.query);
+    books: [],
   }
 
   updateBooks = (result) => {
-    console.log("BookFinder books updateing");
     this.setState(() => ({
       books: result ? [...result] : []
     }))
-  };
-
-  mergeSavedBooksIntoQueryResult = (savedBooks, query) => {
-    BooksAPI.search(query)
-      .then((results) => {
-        if (results) {
-          for (let result of results) {
-            result["shelf"] = "none";
-            for (const savedBook of savedBooks) {
-              if (result.id === savedBook.id) {
-                result["shelf"] = savedBook.shelf;
-                break;
-              }
-            }
-          }
-        }
-        this.updateBooks(results);
-      })
-      .catch(() => { this.updateBooks([]) });
-  };
-
-  searchBook=(event)=>{
-    event.preventDefault();
-    let query = event.target.value;
-    this.mergeSavedBooksIntoQueryResult(this.props.books, query);
-    this.updateQuery(query);
   };
 
   updateQuery = (query) => {
     this.setState(() => ({
       query: query
     }))
+  };
+
+  getSearchResult(query){
+      BooksAPI.search(query)
+      .then((results) => {
+        this.updateBooks(results);
+      })
+      .catch(() => { this.updateBooks([])});
+  }
+
+  searchBooks=(event)=>{
+    event.preventDefault();
+    let query = event.target.value;
+    this.updateQuery(query);
+    this.getSearchResult(query);
   };
 
   render() {
@@ -63,12 +46,12 @@ class BookFinder extends React.Component {
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event) => {this.searchBook(event)}}
+              onChange={(event) => {this.searchBooks(event)}}
             />
           </div>
         </div>
         <div className="search-books-results">
-          <BookList books={this.state.books} onBookReplace={this.props.onBookReplace} />
+          <BookList books={this.state.books} onBookReplace={this.props.onBookReplace} savedBooks={this.props.books}/>
           <ol className="books-grid"></ol>
         </div>
       </div>

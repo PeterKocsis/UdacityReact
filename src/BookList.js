@@ -7,7 +7,10 @@ const BookList = (props) => {
       {props.books.map((item) => {
         return (
           <li key={item.id}>
-            <Book book={item} onBookReplace={props.onBookReplace} />
+            <Book
+              book={item}
+              onBookReplace={props.onBookReplace}
+              savedBooks={props.savedBooks}/>
           </li>)
       })}
     </ol>

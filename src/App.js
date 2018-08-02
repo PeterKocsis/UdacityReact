@@ -67,7 +67,7 @@ class BooksApp extends React.Component {
                 {this.state.shelfs.map((item) => {
                   return (
                     <div key={item.categoryName}>
-                      <BookShelf books={this.state.books} shelf={item} onBookReplace={this.moveBookToShelf} />
+                      <BookShelf books={this.state.books} shelf={item} savedBooks={this.state.books} onBookReplace={this.moveBookToShelf} />
                     </div>
                   )
                 })}

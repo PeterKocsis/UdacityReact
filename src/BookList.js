@@ -4,13 +4,12 @@ import Book from './Book'
 const BookList = (props) => {
   return (
     <ol className="books-grid">
-      {props.books.map((item) => {
+      {props.displayedBooks.map((item) => {
         return (
           <li key={item.id}>
             <Book
               book={item}
-              onBookReplace={props.onBookReplace}
-              savedBooks={props.savedBooks}/>
+              appJsParams = {props.appJsParams}/>
           </li>)
       })}
     </ol>

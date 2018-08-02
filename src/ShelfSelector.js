@@ -4,7 +4,7 @@ class ShelfSelector extends React.Component {
   constructor(props){
     super(props);
     let shelf = 'none';
-    for (const book of props.savedBooks) {
+    for (const book of props.appJsParams.booksOnShelfs) {
       if(book.id === props.book.id){
         shelf = book.shelf;
         break;
@@ -21,7 +21,7 @@ class ShelfSelector extends React.Component {
     this.setState(()=>({
       shelf : targetShelf
     }))
-    this.props.onBookReplace(this.props.book, targetShelf)
+    this.props.appJsParams.onAssignBook(this.props.book, targetShelf)
   };
 
   render(){

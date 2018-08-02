@@ -53,10 +53,14 @@ class BooksApp extends React.Component {
   };
 
   render() {
+    const appJsParams = {
+      booksOnShelfs : this.state.books,
+      onAssignBook : this.moveBookToShelf
+    }
     return (
       <div className="app">
         <Route path='/search' render={() => (
-          <BookFinder books={this.state.books} onBookReplace={this.moveBookToShelf} />)} />
+          <BookFinder appJsParams={appJsParams} />)} />
         <Route exact path='/' render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -67,7 +71,7 @@ class BooksApp extends React.Component {
                 {this.state.shelfs.map((item) => {
                   return (
                     <div key={item.categoryName}>
-                      <BookShelf books={this.state.books} shelf={item} savedBooks={this.state.books} onBookReplace={this.moveBookToShelf} />
+                      <BookShelf displayedBooks={this.state.books} appJsParams={appJsParams} shelf={item}/>
                     </div>
                   )
                 })}

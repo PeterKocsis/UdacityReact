@@ -51,7 +51,7 @@ class BookFinder extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BookList books={this.state.books} onBookReplace={this.props.onBookReplace} savedBooks={this.props.books}/>
+          <BookList displayedBooks={this.state.books} appJsParams={this.props.appJsParams}/>
           <ol className="books-grid"></ol>
         </div>
       </div>

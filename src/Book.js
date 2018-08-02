@@ -12,8 +12,7 @@ const Book = (props) => {
         <div className="book-shelf-changer">
           <ShelfSelector
             book={props.book}
-            savedBooks = {props.savedBooks}
-            onBookReplace={props.onBookReplace}/>
+            appJsParams = {props.appJsParams}/>
         </div>
       </div>
       <div className="book-title">{props.book.title}</div>

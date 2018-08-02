@@ -6,7 +6,7 @@ import * as BooksAPI from './BooksAPI'
 class BookFinder extends React.Component {
   state = {
     query: '',
-    books: [],
+    books: []
   }
 
   /**
@@ -25,21 +25,37 @@ class BookFinder extends React.Component {
    */
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query
+      query: query,
     }))
+  };
+
+  //TODO it seems to me its not working exactly how it should. It still calls multiple time
+  debounce = (func, delay) => {
+    let inDebounce;
+    return function() {
+      const context = this
+      const args = arguments
+      clearTimeout(inDebounce)
+      inDebounce = setTimeout(() => func.apply(context, args), delay)
+    }
   };
 
   /**
    * @description Get a collection of book objects based on the query string
    * @param {string} query
    */
-  getSearchResult(query) {
+  getSearchResult=(query)=> {
+    if(query!==''){
     BooksAPI.search(query)
       .then((results) => {
         this.updateBooks(results);
       })
       .catch(() => { this.updateBooks([]) });
-  }
+      console.log(query);
+    } else {
+      this.updateBooks([]);
+    }
+  };
 
   /**
    * @description Make a search request for the backend service and updates the state of the component based on answer
@@ -47,8 +63,8 @@ class BookFinder extends React.Component {
   searchBooks = (event) => {
     event.preventDefault();
     let query = event.target.value;
-    this.updateQuery(query);
-    this.getSearchResult(query);
+    let promise = Promise.resolve(this.updateQuery(query));
+    promise.then(this.debounce(()=>this.getSearchResult(this.state.query), 700));
   };
 
   render() {

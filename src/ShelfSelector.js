@@ -38,7 +38,6 @@ class ShelfSelector extends React.Component {
   render() {
     return (
       <select value={this.state.shelf} onChange={(event) => {
-        console.log("OnChange event fired");
         this.updateBookShelf(event);
       }}>
         <option value="move" disabled>Move to...</option>

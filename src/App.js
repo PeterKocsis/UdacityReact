@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import BookFinder from './BookFinder'
 import { BookShelf } from './BookShelf'
 
@@ -59,29 +60,31 @@ class BooksApp extends React.Component {
     }
     return (
       <div className="app">
-        <Route path='/search' render={() => (
-          <BookFinder appJsParams={appJsParams} />)} />
-        <Route exact path='/' render={() => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                {this.state.shelfs.map((item) => {
-                  return (
-                    <div key={item.categoryName}>
-                      <BookShelf displayedBooks={this.state.books} appJsParams={appJsParams} shelf={item} />
-                    </div>
-                  )
-                })}
+        <Switch>
+          <Route path='/search' render={() => (
+            <BookFinder appJsParams={appJsParams} />)} />
+          <Route path='/' render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                <div>
+                  {this.state.shelfs.map((item) => {
+                    return (
+                      <div key={item.categoryName}>
+                        <BookShelf displayedBooks={this.state.books} appJsParams={appJsParams} shelf={item} />
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="open-search">
+                <Link to='/search'>Add a book</Link>
               </div>
             </div>
-            <div className="open-search">
-              <Link to='/search'>Add a book</Link>
-            </div>
-          </div>
-        )} />
+          )} />
+        </Switch>
       </div>
     )
   }
